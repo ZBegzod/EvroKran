@@ -10,13 +10,13 @@ from .serializers import *
 def create_order(request):
     if request.method == 'GET':
 
-        serializer = OrderSerializer()
+        serializer = OrderCreateSerializer()
 
         return Response(serializer.data)
 
     elif request.method == 'POST':
 
-        serializer = OrderSerializer(data=request.data, owner=request.user)
+        serializer = OrderCreateSerializer(data=request.data, owner=request.user)
 
         if serializer.is_valid():
             serializer.save()

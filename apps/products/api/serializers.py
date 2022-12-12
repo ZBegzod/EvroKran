@@ -6,7 +6,7 @@ from apps.products.models import *
 class TransportImageSerializers(serializers.ModelSerializer):
     class Meta:
         model = TransportImage
-        fields = ['images']
+        fields = '__all__'
 
 
 class TransportCategorySerializers(serializers.ModelSerializer):
@@ -39,9 +39,17 @@ class TransportDetailSerializer(serializers.ModelSerializer):
 
 
 class TransportSerializer(serializers.ModelSerializer):
+    transport_images = TransportImageSerializers(many=True)
+    type_transport = serializers.StringRelatedField()
+    category = serializers.StringRelatedField()
+
     class Meta:
         model = Transport
-        fields = "__all__"
+        fields = ["id", "name", "ton",
+                  "arrow_length",
+                  "description",
+                  "document",
+                  "characteristics"]
 
 
 class CategorySerializer(serializers.ModelSerializer):
