@@ -49,7 +49,10 @@ class TransportSerializer(serializers.ModelSerializer):
                   "arrow_length",
                   "description",
                   "document",
-                  "characteristics"]
+                  "characteristics",
+                  "transport_images",
+                  "type_transport",
+                  "category"]
 
 
 class CategorySerializer(serializers.ModelSerializer):
