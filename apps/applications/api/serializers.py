@@ -17,7 +17,21 @@ class ObjectsSerializer(serializers.ModelSerializer):
     class Meta:
         
         model = Objects
-        fields = ['title', 'desc', 'object_images']
+        fields = ['id', 'title', 'desc', 'object_images']
+
+
+class ArticleImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArticleImage
+        fields = ['images']
+
+
+class ArticleSerializer(serializers.ModelSerializer):
+    article_images = ArticleImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Article
+        fields = ['id', 'title', 'desc', 'article_images']
 
 
 class ApplicationSerializer(serializers.ModelSerializer):

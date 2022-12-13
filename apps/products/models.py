@@ -28,7 +28,7 @@ class Transport(models.Model):
     ton = models.DecimalField(max_digits=5, decimal_places=2)
     arrow_length = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.TextField(default='')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, related_name='transport_category')
     document = models.ForeignKey(Doc, on_delete=models.CASCADE, null=True)
     characteristics = models.TextField(default='')
     mobile_cranes = 'mc'

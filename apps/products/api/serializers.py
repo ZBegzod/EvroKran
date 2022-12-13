@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from apps.products.models import *
 
 
@@ -12,7 +11,7 @@ class TransportImageSerializers(serializers.ModelSerializer):
 class TransportCategorySerializers(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['title', 'image']
+        fields = ['id', 'title', 'image']
 
 
 class TransportDocumentSerializers(serializers.ModelSerializer):
@@ -28,7 +27,8 @@ class TransportDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transport
-        fields = ['name',
+        fields = ['id',
+                  'name',
                   'ton',
                   'arrow_length',
                   'description',
@@ -40,8 +40,8 @@ class TransportDetailSerializer(serializers.ModelSerializer):
 
 class TransportSerializer(serializers.ModelSerializer):
     transport_images = TransportImageSerializers(many=True)
-    type_transport = serializers.StringRelatedField()
-    category = serializers.StringRelatedField()
+    type_transport = serializers.StringRelatedField(read_only=True)
+    category = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Transport
@@ -56,12 +56,14 @@ class TransportSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    transport_category = TransportSerializer(many=True, read_only=True)
+
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ["id", "title", 'image', 'transport_category']
 
 
 class TransportTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transport
-        fields = ('type_transport', 'name', 'ton')
+        fields = ('id', 'type_transport', 'name', 'ton')

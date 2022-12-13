@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['BegzodAdmin.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
 
 # cors headers ->
 CORS_ALLOWED_ORIGINS = [
@@ -43,7 +43,6 @@ CORS_ALLOW_HEADERS = [
     '*'
 ]
 CORS_ALLOW_CREDENTIALS = True
-
 
 # Application definition
 APPS = [
@@ -187,9 +186,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# STATICFILES_DIRS = [BASE_DIR / 'static']
+
 MEDIA_URL = 'media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
