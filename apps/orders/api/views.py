@@ -1,28 +1,17 @@
-from rest_framework.decorators import api_view
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
-from rest_framework import status, mixins, viewsets
+from rest_framework.generics import mixins, CreateAPIView
+from rest_framework import status, viewsets
 from .serializers import *
 
 
-@api_view(["GET", "POST"])
-@csrf_exempt
-def create_order(request):
-    if request.method == 'GET':
+class OrderCreateApiView(CreateAPIView):
+    serializer_class = OrderCreateSerializer
 
-        serializer = OrderCreateSerializer()
-
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-
-        serializer = OrderCreateSerializer(data=request.data, owner=request.user)
-
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, owner=request.user)
         if serializer.is_valid():
             serializer.save()
-
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

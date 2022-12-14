@@ -40,7 +40,7 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         model = Order
         fields = [
             'product', 'name', 'number',
-            'email', 'sms'
+            'email', 'owner'
         ]
 
 

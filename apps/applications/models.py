@@ -16,7 +16,7 @@ class Applications(models.Model):
 
 class Objects(models.Model):
     title = models.CharField(max_length=150)
-    desc = RichTextField(null=True)
+    desc = models.TextField(null=True)
 
     def __str__(self) -> str:
         return f"{self.title}"
@@ -32,7 +32,7 @@ class ObjectImage(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=150)
-    desc = RichTextField(null=True)
+    desc = models.TextField(null=True)
 
     def __str__(self) -> str:
         return f"{self.title}"
